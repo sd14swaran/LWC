@@ -1,0 +1,8 @@
+.THIS .slds-pill__remove {
+    display: none !important;
+}
+
+.my-pill {
+    --slds-c-pill-color-background: ORANGE;
+    --slds-c-button-icon :none !important
+}

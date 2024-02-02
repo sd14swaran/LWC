@@ -1,0 +1,59 @@
+<template>
+    <div class="slds-box slds-p-around_none slds-m-top_x-small slds-m-bottom_medium slds-m-horizontal_none">
+        <lightning-card title ="POC">
+            <div class="slds-var-m-around_medium">
+                <lightning-combobox
+                    label="Select Salesforce Object"
+                    value={selectedObject}
+                    placeholder="None"
+                    options={allObjects}
+                    onchange={handleObjectSelection}>
+                </lightning-combobox>
+            </div>
+
+            <template if:true={fieldOptions}>
+                <lightning-dual-listbox
+                    label="Fields"
+                    source-label="Available Fields"
+                    selected-label="Selected Fields"
+                    options={fieldOptions}
+                    value={selectedFields}
+                    onchange={handleFieldSelection}
+                    size="5">
+                </lightning-dual-listbox>
+            </template> 
+            
+            <template if:true={showSearch}>
+                <lightning-button label="Search"
+                          variant="brand"
+                          onclick={handleSearch}>
+        </lightning-button>
+
+        <div class="slds-box slds-theme_default">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+                <thead>
+                    <tr>
+                        <template for:each={selectedFields} for:item="eachFieldLabel">
+                            <th key={eachFieldLabel} class="" scope="col">
+                                <div class="slds-truncate" title={eachFieldLabel}>{eachFieldLabel}</div>
+                            </th>
+                        </template>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={tableData} for:item="eachRecord">
+                        <tr key={eachRecord.Id}>
+                            <template for:each={selectedFields} for:item="eachFieldLabel">
+                                
+                                <td key={eachRecord.Id}>{eachRecord.eachFieldLabel}</td>
+                            </template>
+                        </tr> 
+                    </template>
+                </tbody>
+                </table>
+        </div>
+            </template>
+        </lightning-card>
+       
+    </div>
+</template>
